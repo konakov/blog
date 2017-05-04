@@ -1,0 +1,38 @@
+= wrap_layout :layout do
+  .row
+    .small-12.columns
+      %article
+        - content_for(:title, current_article.title)
+        =partial "partials/time_and_comments", locals: {article: current_article}
+        %h2=current_article.title
+        =yield
+        =partial "partials/buttons", locals: {article: current_article}
+        =partial "partials/tags", locals: {article: current_article}
+
+        .links
+          -if current_article.previous_article
+            ←
+            =link_to current_article.previous_article.title, current_article.previous_article
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+          -if current_article.next_article
+            =link_to current_article.next_article.title, current_article.next_article
+            →
+
+  .row#comments
+    .small-12.columns
+      #hypercomments_widget
+      :javascript
+        _hcwp = window._hcwp || [];
+        _hcwp.push({widget:"Stream", widget_id: 63352});
+        (function() {
+          if("HC_LOAD_INIT" in window)return;
+          HC_LOAD_INIT = true;
+          var lang = (navigator.language || navigator.systemLanguage || navigator.userLanguage || "en").substr(0, 2).toLowerCase();
+          var hcc = document.createElement("script"); hcc.type = "text/javascript"; hcc.async = true;
+          hcc.src = ("https:" == document.location.protocol ? "https" : "http")+"://w.hypercomments.com/widget/hc/63352/"+lang+"/widget.js";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hcc, s.nextSibling);
+        })();
+
+      <a href="http://hypercomments.com" class="hc-link" title="comments widget">comments powered by HyperComments</a>

@@ -1,0 +1,67 @@
+- content_for(:title, 'Управление ИТ-процессами | сентябрь — ноябрь 2016')
+
+.row
+  .small-12.columns
+
+    %h1.text-center Управление ИТ-процессами
+
+    %table
+      %tr
+        %th &nbsp;
+        %th.text-center{colspan: 4} Задание
+      %tr
+        %th
+          Фамилия, имя    
+        %th
+          Первое задание    
+        %th
+          =link_to 'Эскалатор', '#t1'
+
+        %th
+          =link_to 'Метки', '#t2'
+        
+        %th
+          Тест    
+
+        %th
+          Зачёт
+
+        -data.students.vmk_2016.sort_by { |student| student.name }.each do |student|
+          %tr
+            %td
+              = student.name
+    
+            -( 0 .. 3 ).each do |n|
+              %td.text-center
+                = student.points[n]
+    
+            %td.text-center
+              = student.test == :passed ? '✓' : '✕'  
+
+    %h3#t1 Задание 1. Эскалатор
+
+    %pВсе вы знаете, что такое эскалатор, а некоторые наверняка сегодня им пользовались. Опишите услугу, которую метрополитен оказывает нам при помощи эскалтора: в чём она состоит, по значениям каких параметров можно оценить её качество? Какие механизмы (устройства, системы) нужны, чтобы оказывать эту услугу? Какие действия выполняет поставщик услуги в отношении этих механизмов? Какие действия выполняет поставщик услуги в отношении получателей услуги? Какие инциденты могут случиться с этой услугой и как их решить? 
+
+    %h3#t2 Задание 2. Метки
+
+    %p Сфотографируйте 2 учётных номера чего-нибудь. Расскажите, что в них хорошо и что плохо.
+
+
+.row#comments
+  .small-12.columns
+    #hypercomments_widget
+    :javascript
+      _hcwp = window._hcwp || [];
+      _hcwp.push({widget:"Stream", widget_id: 63352});
+      (function() {
+        if("HC_LOAD_INIT" in window)return;
+        HC_LOAD_INIT = true;
+        var lang = (navigator.language || navigator.systemLanguage || navigator.userLanguage || "en").substr(0, 2).toLowerCase();
+        var hcc = document.createElement("script"); hcc.type = "text/javascript"; hcc.async = true;
+        hcc.src = ("https:" == document.location.protocol ? "https" : "http")+"://w.hypercomments.com/widget/hc/63352/"+lang+"/widget.js";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hcc, s.nextSibling);
+      })();
+
+    <a href="http://hypercomments.com" class="hc-link" title="comments widget">comments powered by HyperComments</a>
+    

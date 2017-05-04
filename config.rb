@@ -21,6 +21,18 @@ page '/*.txt', layout: false
 ###
 
 activate :blog do |blog|
+  blog.permalink = ":year-:month-:day-:title"
+  blog.sources = "blog/:year-:month-:day-:title.html"
+  blog.layout = 'layouts/article_layout'
+  blog.taglink = "tags/{tag}.html"
+  blog.tag_template = "tag.html"
+  blog.paginate = true
+  blog.per_page = 5
+end
+
+
+
+##activate :blog do |blog|
   # This will add a prefix to all links, template references and source paths
   # blog.prefix = "blog"
 
@@ -36,14 +48,14 @@ activate :blog do |blog|
   # blog.day_link = "{year}/{month}/{day}.html"
   # blog.default_extension = ".markdown"
 
-  blog.tag_template = "tag.html"
-  blog.calendar_template = "calendar.html"
+##  blog.tag_template = "tag.html"
+##  blog.calendar_template = "calendar.html"
 
   # Enable pagination
   # blog.paginate = true
   # blog.per_page = 10
   # blog.page_link = "page/{num}"
-end
+##end
 
 page "/feed.xml", layout: false
 
@@ -67,3 +79,6 @@ configure :build do
   # Minify Javascript on build
   # activate :minify_javascript
 end
+
+Time.zone = "Moscow"
+

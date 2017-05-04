@@ -1,0 +1,35 @@
+---
+pageable: true
+---
+
+.row
+  .small-12.large-8.columns
+    - content_for(:title, page_articles.first.title)
+    - page_articles.each do |article|
+      %article
+        =partial "partials/time_and_comments", locals: {article: article}
+        %h2=link_to article.title, article.url
+        =article.body
+        =partial "partials/tags", locals: {article: article}
+
+    - if paginate && num_pages > 1
+      Страницы:
+      - (1 .. num_pages).each do |n|
+        - if n == page_number
+          = n
+        -else
+          = link_to "#{n}", n == 1 ? "/" : "/page/#{n}"
+
+
+  .small-12.large-3.columns
+    <div class="ya-site-form ya-site-form_inited_no" onclick="return {'action':'http://yandex.ru/sitesearch','arrow':false,'bg':'transparent','fontsize':12,'fg':'#000000','language':'ru','logo':'rb','publicname':'Искать на konakov.biz','suggest':true,'target':'_blank','tld':'ru','type':3,'usebigdictionary':true,'searchid':2232289,'webopt':false,'websearch':false,'input_fg':'#000000','input_bg':'#ffffff','input_fontStyle':'normal','input_fontWeight':'normal','input_placeholder':'Искать на сайте','input_placeholderColor':'#000000','input_borderColor':'#101040'}"><form action="http://yandex.ru/sitesearch" method="get" target="_blank"><input type="hidden" name="searchid" value="2232289"/><input type="hidden" name="l10n" value="ru"/><input type="hidden" name="reqenc" value=""/><input type="search" name="text" value=""/><input type="submit" value="Найти"/></form></div><style type="text/css">.ya-page_js_yes .ya-site-form_inited_no { display: none; }</style><script type="text/javascript">(function(w,d,c){var s=d.createElement('script'),h=d.getElementsByTagName('script')[0],e=d.documentElement;if((' '+e.className+' ').indexOf(' ya-page_js_yes ')===-1){e.className+=' ya-page_js_yes';}s.type='text/javascript';s.async=true;s.charset='utf-8';s.src=(d.location.protocol==='https:'?'https:':'http:')+'//site.yandex.net/v2.0/js/all.js';h.parentNode.insertBefore(s,h);(w[c]||(w[c]=[])).push(function(){Ya.Site.Form.init()})})(window,document,'yandex_site_callbacks');</script>
+
+    %a{class: "twitter-timeline", 'data-dnt': "true", href: "https://twitter.com/konakov", 'data-widget-id': "635074891205726208"}Tweets by @konakov
+
+    :javascript
+      !function(d,s,id){
+        var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';
+        if(!d.getElementById(id)){
+          js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";
+          fjs.parentNode.insertBefore(js,fjs);
+        }}(document,"script","twitter-wjs");

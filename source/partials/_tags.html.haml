@@ -1,0 +1,5 @@
+.articletags
+  Тэги: &middot;
+  -article.tags.each do |tag|
+    =link_to tag, tag_path(tag)
+    &middot;

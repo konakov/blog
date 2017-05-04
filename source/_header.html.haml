@@ -1,0 +1,12 @@
+%header#header
+  -if current_page.url == '/'
+    .name Сайт Сергея Конакова
+    .title
+      +7 926 475-59-34
+      &nbsp;
+      =link_to 'konakov.s@gmail.com', 'mailto:konakov.s@gmail.com'
+      &nbsp;
+      =link_to 'RSS', '/feed.xml'
+  -else
+    .name=link_to 'Сайт Сергея Конакова', '/'
+

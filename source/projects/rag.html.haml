@@ -1,0 +1,149 @@
+- content_for(:title, 'Светофор')
+
+.row
+  .small-12.columns
+
+    =partial "partials/no_js"
+
+    %h1.text-center «Светофор»
+
+    %h3 Теория
+
+    %p Ещё во второй версии Айтиля, в 2000 году, для процесса управления уровнем услуг был рекомендован отчёт RAG. Название просиходит от первых букв слов red (красный), amber (янтарный) и green (зелёный). Это таблица, в строках которой перечислены предоставленные услуги, а в столбцах — периоды, когда они были предоставлены. Периоды могут быть любыми, например: часы, дни, недели, декады (10 дней), месяцы, кварталы, полугодия, годы. У нас такой красно-жёлто-зелёный отчёт принято называть «Светофором». Впервые в России его реализовали В. Фролов и В. Петрушин в «Сибинтеке» в 2002 году.
+
+    %p Цвет ячейки «светофора» показывает, как была оказана услуга в соответствующем периоде, если сравнивать реально достигнутый уровень услуги с уровнем, требуемым в SLA. Красный цвет означает, что требования SLA не выполнены. С выполненным SLA мы поступаем чуть хитрее, чем просто красим его в зелёный. Возможна ситуация, когда SLA выполнено, но еле-еле. Ещё один инцидент, ещё 5 минут простоя, и был бы красный цвет. Поэтому в зелёный мы красим только ячейки, где SLA выполнено так, что реально достигнутый уровень услуги составляет не менее, например, 101 % от требуемого. Если же реально достигнутый уровень услуги превышает требования SLA меньше, чем на 1 %, такую ячейку красим в жёлтый.
+
+    %p
+      Отчёт сразу, на одной странице, показывает:
+      %ol
+        %li Было ли выполнено ли SLA для услуги в каждом периоде.
+        %li Как менялось предоставление услуги со временем. Стало к концу строки больше зелёных ячеек или все они остались далеко в прошлом?
+
+    %h3 Практика
+    %p Возьмём с полдюжины услуг и 12 месяцев. Случайным образом назначим каждой ячейке отчёта число от 90 до 100, это будет реально достигнутый уровень услуги. В SLA потребуем, чтобы значение этого параметра было бы не менее 95. Что именно это за параметр, неважно. Это могут быть проценты доступности или решённые инциденты или вовремя выполненные стандартные запросы — «светофор» может всё.
+
+    %table
+      %tr
+        %th
+          Услуга
+        -['Янв','Фев','Мар','Апр','Май','Июн','Июл','Авг','Сен','Окт','Ноя','Дек'].each do |month|
+          %th
+            =month
+      - treshold = 95
+      - @min = 90
+      - @max = 100
+      - data.lines.services.each_with_index do |line, index|
+        %tr
+          %td
+            =line.title
+          -for i in 1..12 do
+            - value = rand(@min*100..@max*100)/100.00
+            - if value < treshold
+              - td_class = "r"
+            - elsif value > treshold * 1.01
+              - td_class = "g"
+            - else
+              - td_class = "a"
+            %td{class: td_class, id:"tdl#{index}c#{i}"}
+              =value
+
+    .text-center
+      %label{for: "treshold"} Требуемое в SLA значение параметра услуги
+      =input_tag :range, value: "#{treshold}", min: 90, max: 100, step: ".1", oninput: "updateOnTreshold(this.value);", onchange: "updateOnTreshold(this.value);", id: "treshold", autocomplete: "off"
+      %output{for: "treshold", id: "tresholdValue"} #{treshold.to_f}
+
+      %label{for: "minvalue"} Минимальное значение параметра
+      =input_tag :range, value: "#{@min}.0", min: 90, max: 100, step: ".1", oninput: "updateOnMinValue(this.value);", onchange: "updateOnMinValue(this.value);", id: "minvalue", autocomplete: "off"
+      %output{for: "minvalue", id: "minvaluevalue"} #{@min.to_f}
+
+      %label{for: "maxvalue"} Максимальное значение параметра
+      =input_tag :range, value: "#{@max}", min: 90, max: 100, step: ".1",oninput: "updateOnMaxValue(this.value);", onchange: "updateOnMaxValue(this.value);", id: "maxvalue", autocomplete: "off"
+      %output{for: "maxvalue", id: "maxvaluevalue"} #{@max.to_f}
+
+    %br
+
+    %p
+      %br
+      =link_to 'Прокомментировать в&nbsp;блоге', '/2015-09-13-svetofor/'
+
+:javascript
+  function colorCells() {
+    var cellId, cellValue;
+    var treshold = parseFloat(document.getElementById("treshold").value);
+
+    for (index = 0; index < #{data.lines.services.count}; index++) {
+      for (i = 1; i <= 12; i++) {
+        cellId = "tdl" + index.toString() + "c" + i.toString();
+        cellValue = parseFloat(document.getElementById(cellId).innerHTML);
+        if (cellValue < treshold) {
+          document.getElementById(cellId).className = "r";
+        } else if (cellValue > treshold * 1.01) {
+          document.getElementById(cellId).className = "g";
+        } else {
+          document.getElementById(cellId).className = "a";
+        }
+      }
+    }
+  }
+
+  function updateTableValues() {
+    var minValue = parseFloat(document.getElementById("minvalue").value);
+    var maxValue = parseFloat(document.getElementById("maxvalue").value);
+
+    for (index = 0; index < #{data.lines.services.count}; index++) {
+      for (i = 1; i <= 12; i++) {
+        cellId = "tdl" + index.toString() + "c" + i.toString();
+        document.getElementById(cellId).innerHTML = (Math.random() * (maxValue - minValue) + minValue).toFixed(2);
+      }
+    }
+    colorCells();
+  }
+
+  function updateOnTreshold(value) {
+    var Value = parseFloat(value).toFixed(1);
+    var updatedElement = document.getElementById("tresholdValue");
+    updatedElement.innerText = Value;
+    updatedElement.value = Value;
+    colorCells();
+  }
+
+  function updateOnMinValue(value) {
+    var minValue = parseFloat(value).toFixed(1);
+    var maxValue = parseFloat(document.getElementById("maxvalue").value);
+    var updatedElement = document.getElementById("minvaluevalue");
+    if (minValue > maxValue) {
+      document.getElementById("minvalue").value = document.getElementById("maxvalue").value;
+    } else {
+      updatedElement.innerText = minValue;
+      updatedElement.value = minValue;
+    }
+    updateTableValues();
+  }
+
+  function updateOnMaxValue(value) {
+    var minValue = parseFloat(document.getElementById("minvalue").value);
+    var maxValue = parseFloat(value).toFixed(1);
+    var updatedElement = document.getElementById("maxvaluevalue");
+    if (maxValue < minValue) {
+      document.getElementById("maxvalue").value = document.getElementById("minvalue").value;
+    } else {
+      updatedElement.innerText = maxValue;
+      updatedElement.value = maxValue;
+    }
+    updateTableValues();
+  }
+
+  var ie = 0;
+  try { ie = navigator.userAgent.match( /(MSIE |Trident.*rv[ :])([0-9]+)/ )[ 2 ]; }
+  catch(e){};
+
+  if (ie==="11" || ie==="10") {
+    document.getElementById('treshold').removeEventListener("input", updateOnTreshold);
+    document.getElementById('minvalue').removeEventListener("input", updateOnMinValue);
+    document.getElementById('maxvalue').removeEventListener("input", updateOnMaxValue);
+  } else {
+    document.getElementById('treshold').removeEventListener("change", updateOnTreshold);
+    document.getElementById('minvalue').removeEventListener("change", updateOnMinValue);
+    document.getElementById('maxvalue').removeEventListener("change", updateOnMaxValue);
+  };
+
