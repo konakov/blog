@@ -1,7 +1,4 @@
-.row
-  .small-6.large-3.columns
-    .time=article.date.strftime("%d.%m.%Y %H:%M")
-  .small-6.large-3.columns
-    .comments
-      Комментариев:
-      %a{class: "commenter", href: article.url+"#comments"} &nbsp;
+.time=article.date.strftime("%d.%m.%Y %H:%M")
+.comments
+  Комментариев:
+  %a{class: "commenter", href: article.url+"#comments"} &nbsp;

@@ -10,15 +10,14 @@
 
     %title=yield_content(:title) || "Сайт Сергея Конакова"
 
-    -#    =stylesheet_link_tag "app", "style"
-    =stylesheet_link_tag "all", "stile"
-    =javascript_include_tag "modernizr"
+    =stylesheet_link_tag "all"
+    -# =javascript_include_tag "modernizr"
     -#    <link href="/bower_components/Likely/release/likely.css" rel="stylesheet">
 
-  %body#main{class: page_classes}
+  %body#body{class: page_classes}
     = partial "header"
     = partial "ads"
-    = yield
+    #main= yield
     = partial "footer"
     = javascript_include_tag  "all"
     -#    <script src="/bower_components/Likely/release/likely.js" type="text/javascript"></script>
