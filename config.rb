@@ -82,3 +82,4 @@ end
 
 Time.zone = "Moscow"
 
+activate :directory_indexes

@@ -14,7 +14,3 @@ source 'https://rubygems.org' do
 #end
 
 end
-
-#gem 'bitters'
-#gem 'bourbon'
-#gem 'neat'
