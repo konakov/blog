@@ -3,7 +3,7 @@ source 'https://rubygems.org' do
 # Middleman Gems
   gem "middleman", "~> 4.2"
   gem "middleman-blog"
-
+  gem "middleman-minify-html"
   gem 'redcarpet', '~> 3.3', '>= 3.3.3'
 
 # For feed.xml.builder
