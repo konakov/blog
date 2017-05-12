@@ -1,5 +1,5 @@
 !!!
-%html.no-js{lang: "ru"}
+%html{lang: "ru"}
   %head
     %meta{charset: "utf-8"}/
     %meta{content: "width=device-width, initial-scale=1.0", name: "viewport"}/
@@ -9,12 +9,10 @@
     %meta{content: "Сайт Сергея Конакова", name: "description"}/
     %title=yield_content(:title) || "Сайт Сергея Конакова"
     =stylesheet_link_tag "all"
-    -# =javascript_include_tag "modernizr"
   %body{class: page_classes}
     #cont
       = partial "header"
       = partial "ads"
       = yield
       = partial "footer"
-    -#= javascript_include_tag "all"
-    <script src="javascripts/likely.js" type="text/javascript"></script>
+    =javascript_include_tag "likely.js"
