@@ -2,7 +2,7 @@ source 'https://rubygems.org' do
 
 # Middleman Gems
   gem "middleman", "~> 4.2"
-  gem "middleman-blog"
+  gem "middleman-blog", "4.0.1"
   gem "middleman-minify-html"
   gem 'redcarpet', '~> 3.3', '>= 3.3.3'
 
@@ -11,6 +11,7 @@ source 'https://rubygems.org' do
 
 #group :development do
   gem "middleman-livereload"
+  gem "therubyracer"
 #end
 
 end
