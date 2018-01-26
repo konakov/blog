@@ -8,6 +8,7 @@
     %meta{content: "Сергей Конаков, сайт, контакты, айтил, айтиль, ITIL, cobit, pcmm", name: "keywords"}/
     %meta{content: "Сайт Сергея Конакова", name: "description"}/
     %title=yield_content(:title) || "Сайт Сергея Конакова"
+    =favicon_tag 'images/favicon.ico'
     =stylesheet_link_tag "all"
   %body{class: page_classes}
     #cont

@@ -174,7 +174,7 @@
       aminutes = Math.floor((atime-ahours)*60);
       aseconds = Math.round(((atime-ahours)*60-aminutes)*60*10000)/10000;
       if (aseconds==60) {aseconds = 0; aminutes++}
-            if (aminutes==60) {aminutes = 0; ahours++}
+      if (aminutes==60) {aminutes = 0; ahours++}
 
       document.getElementById('g'+i).innerHTML = ahours+':'+aminutes+':'+String(aseconds).replace('.',',');
 
@@ -183,7 +183,7 @@
       aminutes = Math.floor((atime-ahours)*60);
       aseconds = Math.round(((atime-ahours)*60-aminutes)*60*10000)/10000;
       if (aseconds==60) {aseconds = 0; aminutes++}
-            if (aminutes==60) {aminutes = 0; ahours++}
+      if (aminutes==60) {aminutes = 0; ahours++}
 
       document.getElementById('f'+i+'247').innerHTML = ahours+':'+aminutes+':'+String(aseconds).replace('.',',');
 
@@ -192,7 +192,7 @@
       aminutes = Math.floor((atime-ahours)*60);
       aseconds = Math.round(((atime-ahours)*60-aminutes)*60*10000)/10000;
       if (aseconds==60) {aseconds = 0; aminutes++}
-            if (aminutes==60) {aminutes = 0; ahours++}
+      if (aminutes==60) {aminutes = 0; ahours++}
 
       document.getElementById('g'+i+'247').innerHTML = ahours+':'+aminutes+':'+String(aseconds).replace('.',',');
     }
