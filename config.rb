@@ -55,3 +55,4 @@ end
 Time.zone = "Moscow"
 
 activate :directory_indexes
+page "/googled5d63d0b336f5ff7.html", :directory_index => false
