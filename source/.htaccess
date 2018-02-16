@@ -1,4 +1,4 @@
-RewriteEngine On
-RewriteCond %{HTTPS} =on
-RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [QSA,L]
-
+RewriteEngine On 
+RewriteCond %{HTTPS} off [OR]
+RewriteCond %{HTTP_HOST} ^www\. [NC] 
+RewriteRule ^ https://example.com%{REQUEST_URI} [R=301,L,NE]
