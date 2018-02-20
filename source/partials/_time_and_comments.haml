@@ -1,4 +1,4 @@
 .time=article.date.strftime("%d.%m.%Y %H:%M")
-.comments
+.comments_count
   Комментариев:
-  %a{class: "commenter", href: article.url+"#comments"} &nbsp;
+  %a{class: "commenter", href: article.url.chop + "#comments"} &nbsp;_count
