@@ -1,22 +1,28 @@
-#cont
-  @include container
-  padding: 0px 5px 0px 5px 
-//  @media (min-width: 700px)
-//    padding: 0 
+.grid 
+  display: grid
+  grid-template-columns: 150px 1fr 1fr 150px
+  grid-gap: 1em
+
+header, article, #articles, #comments, #copyright, footer
+  grid-column: 1 / 5
+
+#footer-container
+  display: flex 
+
+@media all and (max-width: 700px) 
+  aside,
+  article 
+    grid-column: 1 / 5
+  
+body 
+  margin: 0 auto
+  max-width: 56em
 
 body
-  font-family: 'PT Sans', sans-serif !important
-  src: url('/webfonts/PTS55F_W.woff') format('woff')
-  margin: 0px  
-  
-#articles
-//  @media (min-width: 700px)
-//    @include span(9)
-
-#aside
-  @media (min-width: 700px)
-    @include span(3 last)
-  
+  @font-face
+    font-family: 'PT Sans', sans-serif !important
+    src: url('/webfonts/PTS55F_W.woff') format('woff')
+    
 a
   text-decoration: underline
   color: blue
@@ -36,8 +42,7 @@ img
   display: block
 
 article
-  margin-bottom: 4rem
-  @include span(12)
+  margin-bottom: 2rem
 
 h3
   margin-top: 3rem
@@ -47,7 +52,6 @@ h3
   text-align: center
 
 #header
-  //@include span(12)
   padding-top: 1.4rem
   padding-bottom: 2.4rem
   margin-bottom: 2.5rem
@@ -69,11 +73,7 @@ h3
   font-size: 14px
   margin-top: 1rem
 
-#socialnetworks 
-  @include span(4 of 9)
-
-.comments_count, #hosting
-  @include span(5 of 9 last)
+.comments_count
   img
     margin: 1em
 
@@ -144,7 +144,6 @@ h3
     margin-right: auto
 
 #footer
-  @include span(12)
   font-size: 0.8rem
   color: gray
   a
@@ -156,11 +155,13 @@ h3
   border-top-style: solid
   border-width: thin
   border-color: lightgray
-  margin-right: auto
-  margin-left: auto
-  width: 100%
   padding-bottom: 5rem
   padding-top: 1.5rem
+  ul
+    list-style-type: none
+
+#hosting
+  margin-left: 2em
 
 #comments
   font-size: 0.8rem
