@@ -1,10 +1,8 @@
 - content_for(:title, "Заметки с тэгом «#{tagname}»")
-.row
-  .small-12.columns
-    %h1 Заметки (#{articles.count}) с тэгом «#{tagname}»
-    -articles.each do |article|
-      %article
-        %h2=link_to article.title, article.url
-        =partial "partials/time_and_comments", locals: {article: article}
-        =article.body
-        =partial "partials/tags", locals: {article: article}
+%h1 Заметки (#{articles.count}) с тэгом «#{tagname}»
+-articles.each do |article|
+  %article
+    %h2=link_to article.title, article.url
+    =partial "partials/time_and_comments", locals: {article: article}
+    =article.body
+    =partial "partials/tags", locals: {article: article}
