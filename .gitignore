@@ -21,3 +21,4 @@
 *.swp
 *.swo
 Gemfile.lock
+vendor/
