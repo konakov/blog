@@ -1,4 +1,4 @@
-source 'https://rubygems.org' do 
+source 'https://rubygems.org'  
 
 # Middleman Gems
   gem "middleman"
@@ -15,4 +15,3 @@ source 'https://rubygems.org' do
   gem "therubyracer"
 #end
 
-end

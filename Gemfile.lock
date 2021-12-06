@@ -1,7 +1,4 @@
 GEM
-  specs:
-
-GEM
   remote: https://rubygems.org/
   specs:
     activesupport (6.1.4.1)
@@ -131,13 +128,13 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  builder (~> 3.0)!
-  middleman!
-  middleman-blog!
-  middleman-livereload!
-  middleman-minify-html!
-  redcarpet (~> 3.3, >= 3.3.3)!
-  therubyracer!
+  builder (~> 3.0)
+  middleman
+  middleman-blog
+  middleman-livereload
+  middleman-minify-html
+  redcarpet (~> 3.3, >= 3.3.3)
+  therubyracer
 
 BUNDLED WITH
    2.2.32
