@@ -12,6 +12,6 @@ source 'https://rubygems.org'
 
 #group :development do
   gem "middleman-livereload"
-  gem "therubyracer"
+#  gem "therubyracer"
 #end
 
